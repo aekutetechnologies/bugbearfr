@@ -1,0 +1,12 @@
+input[type=checkbox]{
+    accent-color:  #32c700;  
+    padding: 30px;
+    }
+    input.largerCheckbox {
+        width: 20px;
+        height: 20px;
+    }    
+    input.largerCheckbox1 {
+        width: 29px;
+        height: 29px;
+    }    
