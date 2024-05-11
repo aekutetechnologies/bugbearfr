@@ -6,6 +6,7 @@ import Login from './components/login/Login';
 import SignupClient from './components/signuptoclient/SignupClient';
 import Selectuser from './components/selectuser/Selectuser';
 import SignupFreelancer from './components/signuptofreelancer/SignupFreelancer';
+import AfterLogin from './components/afterlogin/AfterLogin';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path='/selectuser' element={<Selectuser/>}></Route>
       <Route path='/signupclient' element={<SignupClient/>}></Route>
       <Route path='/signupfreelancer' element={<SignupFreelancer/>}></Route>
+      <Route path='/loginafter' element={<AfterLogin/>}></Route>
     </Routes>
     </BrowserRouter>
     </>
