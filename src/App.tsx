@@ -7,13 +7,15 @@ import SignupClient from './components/signuptoclient/SignupClient';
 import Selectuser from './components/selectuser/Selectuser';
 import SignupFreelancer from './components/signuptofreelancer/SignupFreelancer';
 import AfterLogin from './components/afterlogin/AfterLogin';
+import Home from './components/home/Home';
 
 function App() {
   return (
     <>
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Login/>}></Route>
+      <Route path='/' element={<Home/>}></Route>
+      <Route path='/login' element={<Login/>}></Route>
       <Route path='/selectuser' element={<Selectuser/>}></Route>
       <Route path='/signupclient' element={<SignupClient/>}></Route>
       <Route path='/signupfreelancer' element={<SignupFreelancer/>}></Route>

@@ -5,12 +5,13 @@ import { BsGithub } from "react-icons/bs";
 import Navbar from '../nav/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../image/bugbear_logo.jpg'
-import './login.css'
-
+import './login.css';
 import { useState } from 'react';
 import { RegisterApi } from '../../api/RegisterApi';
 import axios from "axios"
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // try {
 //     const response = await RegisterApi().REGISTER("login/",creadential);
 //     setSuccessMessage('Registered successfully!');
@@ -28,7 +29,7 @@ interface Credential {
 const Login: React.FC = () => {
     // bg-[#FBFBFB]
     // bg-[#171717]
-    const usenavigate=useNavigate()
+    const usenavigate = useNavigate()
     useEffect(() => {
         localStorage.removeItem('token')
     }, [])
@@ -39,20 +40,33 @@ const Login: React.FC = () => {
     const [loginToken, setLoginToken] = useState<string>("")
     const [res, setRes] = useState<any>([])
     const [password, setPassword] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
     const handelinput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setCreadential(prevState => ({
             ...prevState,
             [name]: value
         }));
+        if (e.target.name === "password") {
+            setPassword(e.target.value)
+        }
+        if (e.target.name === "email") {
+            setEmail(e.target.value)
+        }
     }
-    let apiUrl = "http://127.0.0.1:8000/api/user/login/"
+    
     const handleSubmit = async () => {
+        if (password.length < 1) {
+            console.log("toas")
+            toast.error("please envet valid password")
+        }
+
         try {
             const response = await RegisterApi().REGISTER("login/", creadential);
             setSuccessMessage('Registered successfully!');
             console.log(SuccessMessage, response);
-            
+            console.log('pas', password)
+
             setRes(response.access)
             if (response && response.msg === "Login Success" && response.token && response.token.access) {
                 localStorage.setItem('token', response.token.access);
@@ -62,7 +76,7 @@ const Login: React.FC = () => {
                 toast.error('Login failed. Please check your credentials.')
                 setErrorMessage('Login failed. Please check your credentials.');
             }
-            
+
         } catch (error) {
             console.error("Error registering:", error);
             toast.error('eroor')
@@ -82,14 +96,12 @@ const Login: React.FC = () => {
         // })
         // .catch(err=>console.log("errrr",err))
     }
-    
-
-
-
 
     return (
         <>
-            <div className='h-14  py-1 bg-[#171717] top-0 sticky'>
+        
+        <div className='bg-[#171717]'>
+        <div className='h-14  py-1 bg-[#171717] top-0 sticky'>
                 <div>
                     <div className='h-10 w-52 py-1'><img src={logo} alt="" className='h-full w-full' /></div>
                 </div>
@@ -97,7 +109,7 @@ const Login: React.FC = () => {
             <div className='login floating w-[30%] m-auto'>
                 <div className='text-center w-[85%] m-auto'>
                     <h1 className='font-semibold text-black py-8 text-3xl'>Login</h1>
-                    <input type="email" name='email' placeholder='Username or Email' className='w-full border-2 border_input1 border-gray-500 rounded p-2 outline-none md:h-9 mt-3 mb-4' onChange={handelinput} />
+                    <input type="email" name='email' placeholder='Username or Email' value={creadential.email} className='w-full border-2 border_input1 border-gray-500 rounded p-2 outline-none md:h-9 mt-3 mb-4' onChange={handelinput} />
                     <input type="password" name='password' placeholder='Password' value={creadential.password} className='w-full border-2 border_input1 border-gray-500 rounded p-2 outline-none md:h-9 mt-3 mb-4' onChange={handelinput} />
                     <button className='border border-black hover:bg-black text-black hover:text-white rounded-full w-full  py-2' onClick={handleSubmit}><span className=' px-10'>Submit</span></button>
                     <div className='w-full flex justify-center mt-5'>
@@ -121,6 +133,9 @@ const Login: React.FC = () => {
             <div className='h-[130px] bg-white w-[90%] my-10 rounded m-auto text-center'>
                 <p className='text-black py-10'>© 2015 - 2024 Bugbeartfront® Global Inc. • Privacy Policy</p>
             </div>
+            <ToastContainer />
+        </div>
+            
         </>
     )
 }

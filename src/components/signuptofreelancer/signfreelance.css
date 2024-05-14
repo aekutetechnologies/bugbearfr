@@ -10,3 +10,6 @@ input[type=checkbox]{
         width: 29px;
         height: 29px;
     }    
+    body{
+        background-color: #171717;
+    }
