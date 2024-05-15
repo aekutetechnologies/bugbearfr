@@ -1,67 +1,22 @@
-import React, { useState } from 'react'
-import './home.css'
-import logo from '../image/bugbear_logo.jpg'
-import { MdOutlineWifiCalling3 } from "react-icons/md";
-import { PiBagFill } from "react-icons/pi";
-import { RxDropdownMenu } from "react-icons/rx";
-import { MdOutlineMail } from "react-icons/md";
-import { FaUserTie } from "react-icons/fa";
-import user from './h-image/user.png';
-import user2 from './h-image/user_2.jpg';
-import bgimg2 from './h-image/bgimg2.png'
-import { CiFacebook } from "react-icons/ci";
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/JXVQAVMFisu
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
 
-import { url } from 'inspector';
-import Sliderbar from './Sliderbar';
-const Home: React.FC = () => {
+import { useState } from "react";
+import { Link } from "react-router-dom"
+import logo from '../image/bugbear_logo.jpg';
+import Model from "./Model";
+
+export default function Component() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const images = [
-    {
-      name:'L Rao',
-      img:user2,
-      title:"[Email is protectd for demo]",
-      country:"india",
-      complete:1,
-  },
-  {
-    name:'swarup',
-    img:user,
-    title:"[Email is protectd for demo]",
-    country:"india",
-    complete:2,
-  },
-  {
-    name:'MD.shahin shahin',
-    img:user,
-    title:"[Email is protectd for demo]",
-    country:"Bangladesh",
-    complete:1,
-},
-{
-  name:'pibimic593 pibimic593',
-  img:user,
-  title:"[Email is protectd for demo]",
-  country:"Ukrain",
-  complete:1,
-},
-{
-  name:'jade McKenzie',
-  img:user,
-  title:"[Email is protectd for demo]",
-  country:"Nizeria",
-  complete:1,
-}
-]
-
+  const [show,setShow]=useState(false);
+  function setClose(){
+    setShow(true)
+  }
   return (
-    <>
-      <div className='bg-gray-300 flex'>
-        <div className='flex'>
-          <li className='flex'><MdOutlineWifiCalling3 /><span>+44770090030</span></li>
-          <li className='flex'><MdOutlineMail /><span>demoemail@gmail.com</span></li>
-        </div>
-        <div></div>
-      </div>
+    <div className="flex flex-col min-h-[100dvh] bg-black text-white">
       <nav className="flex items-center justify-between flex-wrap p-6">
         <div className="flex items-center flex-shrink-0 text-white mr-6 lg:mr-72">
           <img src={logo} className="w-100 h-10 mr-2" alt="Logo" />
@@ -107,107 +62,180 @@ const Home: React.FC = () => {
               Contact Us
             </a>
           </div>
-          <div className='flex justify-evenly'>
+          {/* <div className='flex justify-evenly'>
             <button className="inline-flex mx-4 rounded-full items-center font-bold bg_color border-0 py-2 px-4 text-white">
               Login
             </button>
             <button className="inline-flex mx-4 rounded-full items-center font-bold bg_color border-0 py-2 px-4 text-white">
               register
             </button>
-          </div>
+          </div> */}
         </div>
       </nav>
-      <div className='home_banner text_color w-full flex justify-center'>
-        <div className='w-[98%] m-auto flex my-20 h-[600px]'>
-          <div className='w-full'>
-            <h1 className='text_color font-semibold text-4xl'>GET STARTED</h1>
-            <h1 className='text-black text-5xl font-bold mt-5'>Find the Best Micro Jobs in Our Marketplace.</h1>
-            <div className='w-[80%]'>
-              <p className='text-gray-300 text-[20px] mt-5'>Using Microlab, You can make your can earn by complete job and also post job for various purpose with no extra effort. Jumpstart your business with a premium Script.</p>
+      <main className="flex-1">
+        <section className="relative w-full h-[70vh] bg-gradient-to-r from-black to-gray-900">
+          <div className="absolute inset-0 bg-cover bg-center opacity-20 animate-zoom-in" />
+          <div className="relative container px-4 md:px-6 h-full flex flex-col items-center justify-center space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">Secure Your Digital Future</h1>
+            <p className="max-w-[600px] text-lg text-gray-300">
+              Discover the top cyber security experts and protect your business from online threats.
+            </p>
+            <div className="flex gap-4">
+              <button className="bg-yellow-500 rounded text-black h-11 px-4 hover:bg-yellow-600" onClick={setClose}>
+                Hire Freelancers
+              </button>
+              <div className={show?``:'hidden'}>
+             <Model show={show} setShow={setShow}/>
             </div>
-            <div className='h-20 w-[96%] mt-5 bg-white rounded-full m-auto shadow-xl shadow-red-500'>
-              <div className='w-[90%] m-auto py-4 text-black flex'>
-                <select className='w-full bg-white border-none outline-none text-black'>
-                  <option value="1">select collection</option>
-                  <option value="2">Design illustration</option>
-                  <option value="3">Data collection</option>
-                  <option value="4">Digital marketing</option>
-                  <option value="5">Email marketing</option>
-                  <option value="6">Forums</option>
-                  <option value="7">HR tarining</option>
-                  <option value="8">Lifestyle</option>
-                  <option value="9">Music</option>
-                  <option value="10">Others</option>
-                </select>
-                <input type="text" className='outline-none bg-white w-full' placeholder='search' />
-                <button className='bg_color w-[50%] rounded-full h-11'>Search</button>
-              </div>
-              <h1 className='text-black ml-5 mt-11'>Popular Jobs Category</h1>
-              <div className='flex w-[80%] justify-evenly mt-5'>
-                <button className='border hover:border-yellow-300 px-3 rounded text-black hover:text-yellow-300'>Digital marketing</button>
-                <button className='border hover:border-yellow-300 px-3 rounded text-black hover:text-yellow-300'>Writing & Translation</button>
-                <button className='border hover:border-yellow-300 px-3 boder-rounded text-black hover:text-yellow-300'>Data Cullection</button>
-              </div>
+              <button className="border-yellow-500 rounded bg-white text-black h-11 px-4 hover:bg-yellow-500 hover:text-black" onClick={setClose}>
+                Become a Freelancer
+              </button>
             </div>
           </div>
-          <div className='w-full side_img'>
-          </div>
-        </div>
-      </div>
-      <div className='w-full mt-10 mb-10'>
-        <div className='w-[95%] flex flex-wrap justify-evenly m-auto'>
-          <div className='w-[400px] shadow h-[250px] overflow-hidden'>
-            <div className='relative right-10 bg-yellow-300 rounded-full h-28 w-28 bottom-10'></div>
-            <div className='w-full'><PiBagFill className='m-auto' size={70} color="yellow" /></div>
-            <h1 className='text-5xl font-semibold text-center'>175K+</h1>
-            <h1 className='text-center'>TOTAL JOS POSTS</h1>
-          </div>
-          <div className='w-[400px] shadow h-[250px] overflow-hidden'>
-            <div className='relative right-10 bg-yellow-300 rounded-full h-28 w-28 bottom-10'></div>
-            <RxDropdownMenu className='m-auto' size={70} color="yellow" />
-            <h1 className='text-5xl font-semibold text-center'>500M+</h1>
-            <h1 className='text-center'>COMPLETED PROJECTS</h1>
-          </div>
-          <div className='w-[400px] shadow h-[250px] overflow-hidden'>
-            <div className='relative right-10 bg-yellow-300 rounded-full h-28 w-28 bottom-10'></div>
-            <FaUserTie className='m-auto' size={70} color="yellow" />
-            <h1 className='text-5xl font-semibold text-center'>150K+</h1>
-            <h1 className='text-center'>REGISTERED FREELANCER</h1>
-          </div>
-        </div>
-      </div>
-      <div className="w-full flex flex-wrap mb-10">
-        <div className='w-full md:w-[50%] bg2_img h-[500px]'>
-          <div className='bg_color2 h-full w-full'>
-            <div className='w-[95%] m-auto h-full'>
-              <h1 className='font-bold text-5xl py-20 text-black'>I Want To Show my Talent Here</h1>
-              <p className='text-white text-xl'>Find your jobs by Searching related your job title. Or browse job by Category as per your need and profession</p>
-              <div className='w-full text-center py-20'>
-                <button className='bg-black rounded text-center text-white px-5 h-11 '>Find a job</button>
+        </section>
+        <section className="py-12 md:py-24 bg-gray-900">
+          <div className="container px-4 md:px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+                {/* <ShieldIcon className="h-8 w-8 text-yellow-500 mb-4" /> */}
+                <h3 className="text-xl font-bold mb-2">Cybersecurity Experts</h3>
+                <p className="text-gray-300">Hire top-tier cyber security professionals to protect your business.</p>
+              </div>
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+                {/* <BoltIcon className="h-8 w-8 text-yellow-500 mb-4" /> */}
+                <h3 className="text-xl font-bold mb-2">Secure Solutions</h3>
+                <p className="text-gray-300">
+                  Implement cutting-edge security measures to safeguard your digital assets.
+                </p>
+              </div>
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+                {/* <BriefcaseIcon className="h-8 w-8 text-yellow-500 mb-4" /> */}
+                <h3 className="text-xl font-bold mb-2">Flexible Engagement</h3>
+                <p className="text-gray-300">Hire freelancers for short-term projects or ongoing support.</p>
               </div>
             </div>
           </div>
-        </div>
-        <div className='w-full md:w-[50%] bg3_img'>
-          <div className='w-[95%] m-auto '>
-          <h1 className='font-bold text-5xl py-16 text-black'>I Want To Hire Freelancer for my Project</h1>
-          <p className='text-black text-xl'>Find your jobs by Searching related your job title. Or browse job by Category as per your need and profession</p>
-          <div className='w-full text-center py-20'>
-                <button className='rounded text-center bg_color text-white px-5 h-11 '>Find a job</button>
+        </section>
+        <section className="py-12 md:py-24 bg-black">
+          <div className="container px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-bold">Trusted by Leading Businesses</h2>
+                <p className="text-gray-300">
+                  Our cyber security freelancers have helped protect some of the world's most prominent companies.
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <img
+                    alt="Logo 1"
+                    className="w-full h-auto"
+                    height={50}
+                    src="/placeholder.svg"
+                    style={{
+                      aspectRatio: "100/50",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                  />
+                  <img
+                    alt="Logo 2"
+                    className="w-full h-auto"
+                    height={50}
+                    src="/placeholder.svg"
+                    style={{
+                      aspectRatio: "100/50",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                  />
+                  <img
+                    alt="Logo 3"
+                    className="w-full h-auto"
+                    height={50}
+                    src="/placeholder.svg"
+                    style={{
+                      aspectRatio: "100/50",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                  />
+                  <img
+                    alt="Logo 4"
+                    className="w-full h-auto"
+                    height={50}
+                    src="/placeholder.svg"
+                    style={{
+                      aspectRatio: "100/50",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                  />
+                  <img
+                    alt="Logo 5"
+                    className="w-full h-auto"
+                    height={50}
+                    src="/placeholder.svg"
+                    style={{
+                      aspectRatio: "100/50",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                  />
+                  <img
+                    alt="Logo 6"
+                    className="w-full h-auto"
+                    height={50}
+                    src="/placeholder.svg"
+                    style={{
+                      aspectRatio: "100/50",
+                      objectFit: "cover",
+                    }}
+                    width={100}
+                  />
+                </div>
               </div>
+              <div className="space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-bold">Secure Your Business Today</h2>
+                <p className="text-gray-300">
+                  Get in touch with our team to discuss your cyber security needs and find the perfect freelancer for
+                  your project.
+                </p>
+                <form className="space-y-4">
+                  <input
+                    className="bg-gray-800 w-full border-gray-700 h-12 rounded p-1 focus:border-yellow-500"
+                    placeholder="Name"
+                    type="text"
+                  />
+                  <input
+                    className="bg-gray-800 w-full border-gray-700 h-12 rounded p-1 focus:border-yellow-500"
+                    placeholder="Email"
+                    type="email"
+                  />
+                  <textarea className="bg-gray-800 w-full border-gray-700 h-20 p-1 rounded focus:border-yellow-500" placeholder="Message" />
+                  <button className="bg-yellow-500 h-10 p-1 rounded text-black hover:bg-yellow-600" >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className="bg-gray-900 py-6 text-sm text-gray-400">
+        <div className="container px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between">
+          <p>© 2024 SecureHub. All rights reserved.</p>
+          <div className="flex gap-4 mt-4 sm:mt-0">
+            <Link className="hover:text-yellow-500" to="#">
+              Privacy Policy
+            </Link>
+            <Link className="hover:text-yellow-500" to="#">
+              Terms of Service
+            </Link>
+            <Link className="hover:text-yellow-500" to="#">
+              Contact Us
+            </Link>
           </div>
         </div>
-      </div>
-      <div className='py-10'>
-        <h1 className='font-bold text-center text-4xl'>Most Job Completed Freelancers</h1>
-        <div className='h-2 rounded-full w-[100px] bg_color m-auto my-4'></div>
-        <p className='text-gra-400 text-center'>Possimus laborum voluptates vel eveniet, repellat quod fuga, voluptas Molestias reprehenderit est voluptatibus doloremque?</p>
-        <Sliderbar images={images}/>
-      </div>
-    </>
-
-  );
+      </footer>
+    </div>
+  )
 }
-
-
-export default Home
