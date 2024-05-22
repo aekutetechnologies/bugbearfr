@@ -1,13 +1,9 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/JXVQAVMFisu
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-
 import { useState } from "react";
 import { Link } from "react-router-dom"
 import logo from '../image/bugbear_logo.jpg';
 import Model from "./Model";
+import './home.css'
+import { BoltIcon, BriefcaseIcon, ShieldIcon } from "lucide-react";
 
 export default function Component() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -16,7 +12,7 @@ export default function Component() {
     setShow(true)
   }
   return (
-    <div className="flex flex-col min-h-[100dvh] bg-black text-white">
+    <div className="flex flex-col min-h-[100dvh] bg-[#161616] text-white">
       <nav className="flex items-center justify-between flex-wrap p-6">
         <div className="flex items-center flex-shrink-0 text-white mr-6 lg:mr-72">
           <img src={logo} className="w-100 h-10 mr-2" alt="Logo" />
@@ -43,23 +39,20 @@ export default function Component() {
           </button>
         </div>
         <div
-          className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? "block" : "hidden"}`}
+          className={`w-full block  flex-grow lg:flex lg:w-[700px] ${isOpen ? "block" : "hidden"}`}
         >
-          <div className="text-xl flex font-bold justify-evenly justify-around lg:flex-grow">
-            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4">
-              Home
+          <div className="flex justify-evenly lg:max-w-[40%] lg:ml-auto lg:flex-grow">
+            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200" onClick={setClose}>
+              Freelancers
             </a>
-            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4">
-              FAQs
+            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200" onClick={setClose}>
+              Hire
             </a>
-            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4">
-              Jobs
+            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200">
+              About
             </a>
-            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4">
-              Blogs
-            </a>
-            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4">
-              Contact Us
+            <a href="#" className="block mt-4 lg:inline-block lg:mt-0 text-white-200">
+              Contact
             </a>
           </div>
           {/* <div className='flex justify-evenly'>
@@ -97,19 +90,19 @@ export default function Component() {
           <div className="container px-4 md:px-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                {/* <ShieldIcon className="h-8 w-8 text-yellow-500 mb-4" /> */}
+                <ShieldIcon className="h-8 w-8 text-yellow-500 mb-4" />
                 <h3 className="text-xl font-bold mb-2">Cybersecurity Experts</h3>
                 <p className="text-gray-300">Hire top-tier cyber security professionals to protect your business.</p>
               </div>
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                {/* <BoltIcon className="h-8 w-8 text-yellow-500 mb-4" /> */}
+                <BoltIcon className="h-8 w-8 text-yellow-500 mb-4" />
                 <h3 className="text-xl font-bold mb-2">Secure Solutions</h3>
                 <p className="text-gray-300">
                   Implement cutting-edge security measures to safeguard your digital assets.
                 </p>
               </div>
               <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                {/* <BriefcaseIcon className="h-8 w-8 text-yellow-500 mb-4" /> */}
+                <BriefcaseIcon className="h-8 w-8 text-yellow-500 mb-4" />
                 <h3 className="text-xl font-bold mb-2">Flexible Engagement</h3>
                 <p className="text-gray-300">Hire freelancers for short-term projects or ongoing support.</p>
               </div>
@@ -201,17 +194,17 @@ export default function Component() {
                 </p>
                 <form className="space-y-4">
                   <input
-                    className="bg-gray-800 w-full border-gray-700 h-12 rounded p-1 focus:border-yellow-500"
+                    className="place-1 bg-gray-800 w-full h-10 border-gray-500 border-[1px] rounded p-2"
                     placeholder="Name"
                     type="text"
                   />
                   <input
-                    className="bg-gray-800 w-full border-gray-700 h-12 rounded p-1 focus:border-yellow-500"
+                    className="bg-gray-800 w-full border-gray-500 border-[1px] h-10 rounded p-2"
                     placeholder="Email"
                     type="email"
                   />
-                  <textarea className="bg-gray-800 w-full border-gray-700 h-20 p-1 rounded focus:border-yellow-500" placeholder="Message" />
-                  <button className="bg-yellow-500 h-10 p-1 rounded text-black hover:bg-yellow-600" >
+                  <textarea className="bg-gray-800 w-full h-20 p-2 border-gray-500 border-[1px] rounded" placeholder="Message" />
+                  <button className="bg-yellow-500 px-4 h-10 p-1 rounded text-black hover:bg-yellow-600" >
                     Submit
                   </button>
                 </form>

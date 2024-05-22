@@ -1,0 +1,18 @@
+input::placeholder,
+textarea::placeholder {
+  color: white;
+  opacity: 1; /* Ensures the color is fully opaque */
+}
+
+/* You might need to add more specificity if necessary */
+.place-1::placeholder {
+  color: white;
+}
+input:focus,
+textarea:focus {
+  border:1px solid yellow;
+  outline: none;
+}
+.wb{
+  max-width: 30%;
+}
