@@ -1,11 +1,11 @@
-input::placeholder,
+.ho_in::placeholder,
 textarea::placeholder {
   color: white;
   opacity: 1; /* Ensures the color is fully opaque */
 }
 
 /* You might need to add more specificity if necessary */
-.place-1::placeholder {
+.ho_in::placeholder {
   color: white;
 }
 input:focus,
@@ -15,4 +15,13 @@ textarea:focus {
 }
 .wb{
   max-width: 30%;
+}
+.bg_img{
+  background-image: url("./image/html-css-collage-concept-with-hacker.jpg");
+  background-repeat: no-repeat;
+  
+  background-size: cover;
+}
+.bg_colorr{
+  background-color: rgba(5, 8, 11, 0.8);
 }

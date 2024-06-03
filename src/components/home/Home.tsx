@@ -7,8 +7,8 @@ import { BoltIcon, BriefcaseIcon, ShieldIcon } from "lucide-react";
 
 export default function Component() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [show,setShow]=useState(false);
-  function setClose(){
+  const [show, setShow] = useState(false);
+  function setClose() {
     setShow(true)
   }
   return (
@@ -66,25 +66,28 @@ export default function Component() {
         </div>
       </nav>
       <main className="flex-1">
-        <section className="relative w-full h-[70vh] bg-gradient-to-r from-black to-gray-900">
-          <div className="absolute inset-0 bg-cover bg-center opacity-20 animate-zoom-in" />
-          <div className="relative container px-4 md:px-6 h-full flex flex-col items-center justify-center space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">Secure Your Digital Future</h1>
-            <p className="max-w-[600px] text-lg text-gray-300">
-              Discover the top cyber security experts and protect your business from online threats.
-            </p>
-            <div className="flex gap-4">
-              <button className="bg-yellow-500 rounded text-black h-11 px-4 hover:bg-yellow-600" onClick={setClose}>
-                Hire Freelancers
-              </button>
-              <div className={show?``:'hidden'}>
-             <Model show={show} setShow={setShow}/>
-            </div>
-              <button className="border-yellow-500 rounded bg-white text-black h-11 px-4 hover:bg-yellow-500 hover:text-black" onClick={setClose}>
-                Become a Freelancer
-              </button>
+        <section className="bg_img relative w-full h-[90vh] bg-gradient-to-r from-black to-gray-900">
+          <div className="bg_colorr h-full w-full">
+            <div className="absolute inset-0 bg-cover bg-center opacity-20 animate-zoom-in" />
+            <div className="relative container px-4 md:px-6 h-full flex flex-col items-center justify-center space-y-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">Secure Your Digital Future</h1>
+              <p className="max-w-[600px] text-lg text-gray-300">
+                Discover the top cyber security experts and protect your business from online threats.
+              </p>
+              <div className="flex gap-4">
+                <button className="bg-yellow-500 rounded text-black h-11 px-4 hover:bg-yellow-600" onClick={setClose}>
+                  Hire Freelancers
+                </button>
+                <div className={show ? `` : 'hidden'}>
+                  <Model show={show} setShow={setShow} />
+                </div>
+                <button className="border-yellow-500 rounded bg-white text-black h-11 px-4 hover:bg-yellow-500 hover:text-black" onClick={setClose}>
+                  Become a Freelancer
+                </button>
+              </div>
             </div>
           </div>
+
         </section>
         <section className="py-12 md:py-24 bg-gray-900">
           <div className="container px-4 md:px-6">
@@ -194,16 +197,16 @@ export default function Component() {
                 </p>
                 <form className="space-y-4">
                   <input
-                    className="place-1 bg-gray-800 w-full h-10 border-gray-500 border-[1px] rounded p-2"
+                    className="ho_in place-1 bg-gray-800 w-full h-10 border-gray-500 border-[1px] rounded p-2"
                     placeholder="Name"
                     type="text"
                   />
                   <input
-                    className="bg-gray-800 w-full border-gray-500 border-[1px] h-10 rounded p-2"
+                    className="ho_in bg-gray-800 w-full border-gray-500 border-[1px] h-10 rounded p-2"
                     placeholder="Email"
                     type="email"
                   />
-                  <textarea className="bg-gray-800 w-full h-20 p-2 border-gray-500 border-[1px] rounded" placeholder="Message" />
+                  <textarea className="ho_in bg-gray-800 w-full h-20 p-2 border-gray-500 border-[1px] rounded" placeholder="Message" />
                   <button className="bg-yellow-500 px-4 h-10 p-1 rounded text-black hover:bg-yellow-600" >
                     Submit
                   </button>
