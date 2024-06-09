@@ -1,8 +1,8 @@
 .login{
     background-color: white;
-    border-radius: 12px;
+    border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.125);
-    border-radius: 10px;
+ 
 }
 .floating {  
     animation-name: floating;
@@ -19,3 +19,50 @@
     50%  { transform: translate(0, 15px); }
     100%   { transform: translate(0, -0px); }    
 }
+.line{
+    width: 0.5px;
+}
+input.check[type=checkbox]{
+    accent-color:  black;  
+    padding: 30px;
+    }
+    input.check{
+        accent-color:  black;  
+    }    
+    input.largerCheckbox1 {
+        width: 9px;
+        height: 9px;
+    }    
+/* <div className='mx-3'>v</div>
+<div className='w-[0.5px] bg-gray-300 h-[300px]'>
+</div>
+<div className="mx-3">
+    v
+</div> */
+
+/* <input type="email" name='email' placeholder='Username or Email' value={creadential.email} className='w-full border-2 border_input1 border-gray-500 rounded p-2 outline-none md:h-9 mt-3 mb-4' onChange={handelinput} />
+                    <input type="password" name='password' placeholder='Password' value={creadential.password} className='w-full border-2 border_input1 border-gray-500 rounded p-2 outline-none md:h-9 mt-3 mb-4' onChange={handelinput} />
+                    <button className='border border-black hover:bg-black text-black hover:text-white rounded-full w-full  py-2' onClick={handleSubmit}><span className=' px-10'>Submit</span></button>
+                    <div className='w-full flex justify-center mt-5'>
+                        <div className='h-[1px] w-full bg-black mt-3'><span></span></div>
+                        <span className='mx-2'>or</span>
+                        <div className='h-[1px] w-full bg-black mt-3'><span></span></div>
+                    </div> */
+
+
+                    /* <div className='text-center w-[85%] m-auto'>
+                    <h1 className='font-semibold text-black py-8 text-3xl'>Login</h1>
+                    
+                    <div className='flex gap-1.5 justify-center m-auto w-[80%] mt-10 mb-10'>
+                        <FcGoogle size={30} />
+                        <FaFacebookF size={30} color='blue' />
+                        <BsGithub size={30} />
+                    </div>
+                    <div className='w-full flex justify-center mt-3 pb-10'>
+                        <div className='h-[2px] w-[18%] bg-black mt-3'><span></span></div>
+                        <span className='mx-2 text-black w-full'>Don't have an Bugbeartfront account? </span>
+                        <div className='h-[2px] w-[18%] bg-black mt-3'><span></span></div>
+                    </div>
+                    <Link to='/selectuser' ><button className='border border-green-400 rounded-full py-2 mb-5'><span className='text-greeen px-10 text-green-400'>Sign Up</span></button></Link>
+                </div>
+            </div> */
