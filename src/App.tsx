@@ -9,6 +9,7 @@ import SignupFreelancer from './components/signuptofreelancer/SignupFreelancer';
 import AfterLogin from './components/afterlogin/AfterLogin';
 import Home from './components/home/Home';
 import ExamPage from './components/Exampage/ExamPage';
+import DashBoard from './components/dashboard/DashBoard';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path='/signupfreelancer' element={<SignupFreelancer/>}></Route>
       <Route path='/loginafter' element={<AfterLogin/>}></Route>
       <Route path='/exampage' element={<ExamPage/>}></Route>
+      <Route path='/dashboard' element={<DashBoard/>}></Route>
     </Routes>
     </BrowserRouter>
     </>
