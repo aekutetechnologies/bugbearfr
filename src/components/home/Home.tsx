@@ -195,7 +195,7 @@ export default function Component() {
                   Get in touch with our team to discuss your cyber security needs and find the perfect freelancer for
                   your project.
                 </p>
-                <form className="space-y-4">
+                <form className="spa space-y-4">
                   <input
                     className="ho_in place-1 bg-gray-800 w-full h-10 border-gray-500 border-[1px] rounded p-2"
                     placeholder="Name"

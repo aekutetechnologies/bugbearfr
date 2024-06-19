@@ -1,0 +1,14 @@
+.modal{
+ 
+}
+.ho_in::placeholder {
+    color: gray;
+  }
+
+  .ho_in2::placeholder {
+    color: gray;
+    margin-bottom: 20px;
+  }
+.bl_color{
+  background-color: yellow;
+}  

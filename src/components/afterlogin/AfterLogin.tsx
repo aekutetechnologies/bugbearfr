@@ -64,10 +64,7 @@ const AfterLogin = () => {
             if (response) {
                 setImage2(response.data.profile_pic_url)
             }
-            // console.log(response.data.profile_pic)
-            // const dt=response.data.profile_pic
-
-
+          
         } catch (error) {
             console.error("Error fetching profile:", error);
             toast.error("Error fetching profile.");
@@ -84,7 +81,6 @@ const AfterLogin = () => {
             console.log("uploaded", response);
         } catch (error) {
             console.log('Error register:', error);
-
         }
     }
 
@@ -94,7 +90,6 @@ const AfterLogin = () => {
             const response = await RegisterApi().REGISTER("user-details/", info)
             setSuccessMessage('Registered successfully!');
             console.log(SuccessMessage, response);
-
 
         } catch (error) {
             console.error("Error fetching user profile:", error);

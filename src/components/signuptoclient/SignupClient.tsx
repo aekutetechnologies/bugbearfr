@@ -146,10 +146,10 @@ const SignupClient = () => {
                         <div className='h-[60px] w-52 py-1'><img src={logo} alt="" className='h-full w-full' /></div>
                     </div>
                     <div className='text-2xl text-white mr-5 mt-4 '>
-                    <Link to="/login"><span>Login</span></Link>/<Link to='/signupclient'><span>Signup</span></Link>
-                    </div>    
+                        <Link to="/login"><span>Login</span></Link>/<Link to='/signupclient'><span>Signup</span></Link>
+                    </div>
                 </div>
-     
+
                 <div className='w-[70%] md:w-[25%] bg-white rounded-[15px] m-auto mt-20'>
                     <div className='w-[90%] m-auto'>
                         {/* <div className='flex justify-center justify-evenly w-full'>
@@ -162,7 +162,7 @@ const SignupClient = () => {
                             <input type="text" placeholder='Username or Email' className='w-full border-2 border_input1 border-black rounded p-2 outline-none md:h-9 mt-3 mb-4' />
                         </div>
                     </div> */}
-                    <p className='text-2xl font-semibold text-black mb-5 mt-3'>Create an account</p>
+                        <p className='text-2xl font-semibold text-black mb-5 mt-3'>Create an account</p>
                         <div className=''>
                             <label htmlFor="" className='text-black'>Email</label>
                             <input type="email" name='email' placeholder='Email' className='w-full border border_input1 border-black rounded-[14px] p-2 outline-none md:h-11 mt-3 mb-4' onChange={handlechange} />
@@ -190,21 +190,21 @@ const SignupClient = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className='h-14  py-1 bg-[#171717] top-0 flex justify-center justify-evenly sticky mt-10'>
                     <div>
                         <div className='h-[60px] w-52 py-1 ml-5'><img src={logo} alt="" className='h-full w-full' /></div>
                     </div>
                     <div className='text-center text-white mx-40'>
-                    <p>Copyrights @ bugbrear</p>
+                        <p>Copyrights @ bugbrear</p>
                     </div>
-    
+
                     <div className='flex gap-1.5 justify-center'>
                         <FcGoogle size={30} />
                         <FaFacebookF size={30} color='blue' />
                         <BsGithub size={30} />
                     </div>
-                    
+
                 </div>
 
                 <ToastContainer />

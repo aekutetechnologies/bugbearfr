@@ -20,7 +20,7 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/selectuser' element={<Selectuser/>}></Route>
       <Route path='/signupclient' element={<SignupClient/>}></Route>
-      <Route path='/signupfreelancer' element={<SignupFreelancer/>}></Route>
+      {/* <Route path='/signupfreelancer' element={<SignupFreelancer/>}></Route> */}
       <Route path='/loginafter' element={<AfterLogin/>}></Route>
       <Route path='/exampage' element={<ExamPage/>}></Route>
       <Route path='/dashboard' element={<DashBoard/>}></Route>

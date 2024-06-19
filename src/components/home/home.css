@@ -8,9 +8,9 @@ textarea::placeholder {
 .ho_in::placeholder {
   color: white;
 }
-input:focus,
-textarea:focus {
-  border:1px solid yellow;
+.spa .ho_in:focus,
+.spa .ho_in textarea:focus {
+  border: 1px solid yellow;
   outline: none;
 }
 .wb{
