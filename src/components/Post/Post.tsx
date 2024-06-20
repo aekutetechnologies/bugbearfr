@@ -8,11 +8,14 @@ import { LuThumbsUp } from "react-icons/lu";
 import { HiOutlineHandThumbUp } from "react-icons/hi2";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import axios from 'axios';
+import logo from '../image/bugbear_logo.jpg'
+
 import { toast } from 'react-toastify';
 import { RegisterApi } from '../../api/RegisterApi';
 import { MdClose } from "react-icons/md";
 import { PiImageDuotone } from "react-icons/pi";
 import { title } from 'process';
+import { Link } from 'react-router-dom';
 interface PostData {
     title: string;
     content: string;
@@ -41,7 +44,7 @@ const Post = () => {
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        
+
 
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
@@ -223,7 +226,7 @@ const Post = () => {
                         <div className='flex'><img src={imgs} alt="" className='h-5 w-5 rounded-full' /><span className='text-gray-300'>144</span></div>
                         <div className=' ml-auto'>13 comments</div>
                     </div>
-                    <div className='bg-gray-300 rounded-b-[10px] px-5'>
+                    <div className='bg-gray-300 rounded-b-[10px] px-5 py-2'>
                         <div className='flex justify-evenly'>
                             <div className='flex mr-auto gap-1'><HiOutlineHandThumbUp size={30} /><span className='text-xl font-bold'>Like</span></div>
                             <div className='flex gap-1'><IoChatbubbleOutline size={20} className="mt-1" /><span className='text-xl font-bold'>Comments</span></div>
@@ -236,6 +239,7 @@ const Post = () => {
 
     return (
         <>
+            
             <div className='w-[600px]'>
                 <div className='w-full bg-white flex justify-evenly rounded h-20 pt-5'>
                     <div className='bg_col flex max-h-6 px-3 rounded mr-auto ml-4'><RiFilter3Line className='mt-1' />Filter</div>

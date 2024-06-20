@@ -118,13 +118,13 @@ const Login: React.FC = () => {
         <>
 
             <div className='bg-[#171717]'>
-            <div className='h-14  py-1 bg-[#171717] top-0 flex sticky justify-center justify-evenly gap-56 md:gap-[650px]'>
+                <div className='h-14  py-1 bg-[#171717] top-0 flex sticky justify-center justify-evenly gap-56 md:gap-[650px]'>
                     <div className=''>
                         <div className='h-[60px] w-52 py-1'><img src={logo} alt="" className='h-full w-full' /></div>
                     </div>
                     <div className='text-2xl text-white mr-5 mt-4 '>
-                    <Link to="/login"><span>Login</span></Link>/<Link to='/signupclient'><span>Signup</span></Link>
-                    </div>    
+                        <Link to="/login"><span>Login</span></Link>/<Link to='/signupclient'><span>Signup</span></Link>
+                    </div>
                 </div>
                 <div className='login w-[55%] h-[450px] p-5 m-auto flex justify-center justify-evenly mt-20'>
                     <div className='text-center mx-3 w-[40%]'>
@@ -150,7 +150,7 @@ const Login: React.FC = () => {
                         <div className='flex w-full'>
                             <label htmlFor="" className='text-xl text-gray-400'>Password</label>
                             <span className="ml-auto mr-5" onClick={handleToggle2}>
-                                <Icon className="" icon={icon2} size={15} /><span className='pt-3 mx-1'>{type2==="password"?"Hide":"Show"}</span>
+                                <Icon className="" icon={icon2} size={15} /><span className='pt-3 mx-1'>{type2 === "password" ? "Hide" : "Show"}</span>
                             </span>
                         </div>
                         <input type={type2} name='password' placeholder='Password' value={creadential.password} className='w-full border-2 border_input1 border-gray-500 rounded-[10px] p-2 outline-none md:h-11 mt-3 mb-4' onChange={handelinput} />
@@ -172,15 +172,15 @@ const Login: React.FC = () => {
                         <div className='h-[60px] w-52 py-1 ml-5'><img src={logo} alt="" className='h-full w-full' /></div>
                     </div>
                     <div className='text-center text-white mx-40'>
-                    <p>Copyrights @ bugbrear</p>
+                        <p>Copyrights @ bugbrear</p>
                     </div>
-    
+
                     <div className='flex gap-1.5 justify-center'>
                         <FcGoogle size={30} />
                         <FaFacebookF size={30} color='white' />
-                        <BsGithub size={30} color="white"/>
+                        <BsGithub size={30} color="white" />
                     </div>
-                    
+
                 </div>
 
                 <ToastContainer />
