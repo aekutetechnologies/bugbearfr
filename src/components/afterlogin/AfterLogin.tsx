@@ -115,7 +115,7 @@ const AfterLogin = () => {
             <div className='w-[40%] m-auto bg-black'>
                 <div className="w-[80%] m-auto flex justify-center mb-10">
                     <div className="w-[130px] h-[130px]" onClick={handleImageClick}>
-                        {image ? <img src={image} alt="Profile Preview" className="mt-3 rounded-full w-full h-full" /> : <>{datastore.profile_pic_url ? (<img src={datastore.profile_pic_url} alt="Profile Picture" className="mt-3 w-full h-auto" />) : (<img src={user} alt="User Placeholder" className="mt-3 w-full h-auto" />)}</>}
+                        {image ? <img src={image} alt="Profile Preview" className="mt-3 rounded-full w-full h-full" /> : <>{datastore.profile_pic_url ? (<img src={datastore.profile_pic_url} alt="Profile Picture" className="mt-3 w-full h-full rounded-full" />) : (<img src={user} alt="User Placeholder" className="mt-3 w-full h-auto" />)}</>}
                         <div className="relative bottom-10 ml-auto bg-[#f6ff00] rounded-full h-6 w-6 flex item-center justify-center"><MdOutlineEdit className="mt-1" /></div>
                         <input type="file" onChange={handleChange} ref={inputRef} className="hidden text-white file:w-[60%] file:h-9 mt-3 mb-4" />
                     </div>
