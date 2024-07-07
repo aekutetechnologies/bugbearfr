@@ -13,12 +13,14 @@ import user_man from './images/user_man.jpeg'
 import { BsCardImage } from "react-icons/bs";
 import { toast } from 'react-toastify';
 import { RegisterApi } from '../../api/RegisterApi';
+import { IoSend } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import { FaRegSmile } from "react-icons/fa";
 import { PiImageDuotone } from "react-icons/pi";
 import { title } from 'process';
 import { Link } from 'react-router-dom';
 interface PostData {
+    id: number;
     title: string;
     content: string;
     image: string;
@@ -55,11 +57,12 @@ const Post = () => {
     const [data, setData] = useState<any>([])
     const [commentSection, setCommentSection] = useState<Boolean>(false)
     const modalRef = useRef<HTMLDivElement>(null);
-    const [comments, setComments] = useState<{ [key: number]: string }>({});
+    const [comments, setComments] = useState<string[]>([]);
+    const [commentData, setCommentData] = useState<CommentData[]>([]);
     const modalRef2 = useRef<HTMLDivElement>(null);
     const [activeCommentIndex, setactiveCommentIndex] = useState<number | null>(null)
     const [profile, setProfile] = useState<string | Blob>("")
-    const [commentData, setCommentData] = useState<{ [key: number]: CommentData[] }>({});
+
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleImageClick = () => {
@@ -108,12 +111,14 @@ const Post = () => {
     const fetchComments = async (postId: number) => {
         try {
             const response = await axios.get(`http://127.0.0.1:8000/api/posts/comments/${postId}/`);
-            setCommentData(prevState => ({ ...prevState, [postId]: response.data }));
+            setCommentData(response.data);
+            setactiveCommentIndex(postId);
+            setCommentSection(true);
         } catch (error) {
             console.error("Error fetching comments:", error);
+            toast.error("Error fetching comments.");
         }
     };
-
     const fetchProfile = async () => {
         try {
 
@@ -158,11 +163,12 @@ const Post = () => {
             }
         }
     }
-    const CommentSection = (index: number) => {
-        const postId = index + 1;
-        fetchComments(postId);
+    const CommentSection = (postId: number) => {
+        
         setCommentSection(true)
-        setactiveCommentIndex(index)
+        fetchComments(postId);
+        setactiveCommentIndex(postId)
+        console.log("iddddd:", postId)
     }
     const fetchUserProfile = async () => {
 
@@ -182,18 +188,21 @@ const Post = () => {
     }
 
     const handleCommentChange = (index: number, value: string) => {
-        setComments(prevComments => ({
-            ...prevComments,
-            [index]: value
-        }));
+        const updatedComments = [...comments];
+
+        // Update the comment at the specified index with the new value
+        updatedComments[index] = value;
+
+        // Set the updated comments array back to state
+        setComments(updatedComments);
     }
 
     const submitComment = async (index: number) => {
         const comment = comments[index];
-        if (!comment) return;
+      
 
-        const postId = index + 1;
-        const url = `http://127.0.0.1:8000/api/posts/comments/${postId}/`;
+        
+        const url = `http://127.0.0.1:8000/api/posts/comments/${index}/`;
         let token = localStorage.getItem('token');
 
         try {
@@ -205,10 +214,10 @@ const Post = () => {
             });
 
             console.log('Comment posted successfully:', response.data);
-            setComments(prevComments => ({
-                ...prevComments,
-                [index]: ""
-            }));
+            // setComments(prevComments => ({
+            //     ...prevComments,
+            //     [index]: ""
+            // }));
             fetchProfile(); // Refresh the post data to show the new comment
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -298,13 +307,13 @@ const Post = () => {
         };
     }, [hide]);
 
-    
+
     var datainfo = datastore.map((d: PostData, index: number) => {
-        const { title, content, image } = d;
+        const { title, content, image, id } = d;
 
         return (
             <>
-                <div key={index + 1} className='w-full bg-white rounded mt-5'>
+                <div key={id} className='w-full bg-white rounded mt-5'>
                     <div className='flex justify-evenly rounded px-5 py-2'>
                         <div className='flex gap-2'>
                             <div>
@@ -331,34 +340,29 @@ const Post = () => {
                     <div className='bg-gray-300 rounded-b-[4px] px-5 py-2'>
                         <div className='flex justify-evenly'>
                             <div className='flex mr-auto gap-1'><HiOutlineHandThumbUp size={30} className="cursor-pointer" onClick={() => { postLike(index) }} /><span className='text-xl font-bold' >Like</span></div>
-                            <div className='flex gap-1'><IoChatbubbleOutline size={20} className="mt-1 cursor-pointer" onClick={() => {CommentSection (index)}} /><span className='text-xl font-bold'>Comments</span></div>
+                            <div className='flex gap-1'><IoChatbubbleOutline size={20} className="mt-1 cursor-pointer" onClick={() => { CommentSection(id) }} /><span className='text-xl font-bold'>Comments</span></div>
                         </div>
                     </div>
-                    <div className={commentSection && activeCommentIndex === index ? 'flex py-2' : 'hidden'}>
+                    <div className={commentSection && activeCommentIndex === id ? 'flex py-2' : 'hidden'}>
                         <div className='mx-1'>
                             <div className='h-10 w-10 overflow-none'><img src={user_man} alt="" className='h-full w-full rounded-full rounded-[100%]' /></div>
                         </div>
-                        <div className='rounded-full border border-black w-full flex mx-1'><input type="text" placeholder='Add a comment...' className='w-full mx-2 my-1 outline-none' value={comments[index] || ""} onChange={(e) => handleCommentChange(index, e.target.value)} /><BsCardImage className='mx-1 mt-2' size={25} /><FaRegSmile className='mx-1 mt-2' size={25} /></div>
+                        <div className='rounded-full border border-black w-full flex mx-1'><input type="text" placeholder='Add a comment...' className='w-full mx-2 my-1 outline-none' value={comments[id] || ""} onChange={(e) => handleCommentChange(id, e.target.value)} /><IoSend size={25} className="mx-1 mt-1 cursor-pointer" onClick={() => submitComment(id)}/></div>
                     </div>
-                    <div className='flex justify-end'>
-                        <button
-                            onClick={() => submitComment(index)}
-                            className='px-4 py-2 bg-blue-500 text-white rounded mt-2'
-                        >
-                            Submit
-                        </button>
-                    </div>
-                    <div className={commentSection && activeCommentIndex === index ? 'py-2' : 'hidden'}>
-                    {commentSection && activeCommentIndex === index && commentData[index] && commentData[index].map((comment: CommentData) => (
-                                <div className='flex p-1 gap-2' key={comment.id}>
-                                    <img src={comment.comment_user.profile_pic_url} className='w-8 h-8 rounded-full' alt="Profile" />
-                                    <div>
-                                        <p className='text-[14px] font-semibold'>{comment.comment_user.first_name || "User"}</p>
-                                        <p className='text-[12px]'>{comment.body}</p>
-                                    </div>
-                                </div>
-                            ))}
-                    </div>
+                    
+                    <div className={commentSection && activeCommentIndex === id ? 'py-2' : 'hidden'}>
+                    {commentData.map((comment: CommentData) => (
+                        <div key={comment.id} className='flex p-1 gap-2'>
+                            <div className='h-10 w-10 overflow-hidden'>
+                                <img src={comment.comment_user.profile_pic_url} alt="Profile" className='h-full w-full rounded-full' />
+                            </div>
+                            <div>
+                                <p className='text-[14px] font-semibold'>{comment.comment_user.first_name || "User"}</p>
+                                <p className='text-[12px]'>{comment.body}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
                 </div>
             </>
         )
