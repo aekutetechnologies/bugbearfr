@@ -1,3 +1,13 @@
 .btn1{
     background-color: yellow;
 }
+.user_in::placeholder,
+textarea::placeholder {
+  color: black;
+  opacity: 1; /* Ensures the color is fully opaque */
+}
+
+/* You might need to add more specificity if necessary */
+.user_in::placeholder {
+  color: black;
+}
