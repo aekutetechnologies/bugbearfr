@@ -5,6 +5,10 @@ import { RiAddLargeFill } from "react-icons/ri";
 import comp from '../image/img-comp.jpg'
 import { HiOutlineArrowRight } from "react-icons/hi";
 import './user.css'
+interface Skill {
+    id: number;
+    name: string;
+  }
 const UserProfile = () => {
     const [show1, setShow1] = useState<Boolean>(false)
     const [showModal, setShowModal] = useState(false);
@@ -12,10 +16,36 @@ const UserProfile = () => {
     const [showModal2, setShowModal2] = useState(false);
     const [showModal3, setShowModal3] = useState(false);
     const [showModal4, setShowModal4] = useState(false);
+    const [showModal5, setShowModal5] = useState(false);
+    const [showModal6, setShowModal6] = useState(false);
+    const [showModal7, setShowModal7] = useState(false);
+
+    const [skills, setSkills] = useState<Skill[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [newSkill, setNewSkill] = useState<string>('');
+  const [editMode, setEditMode] = useState<boolean>(false);
 
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
 
+    const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const addSkill = () => {
+    if (newSkill.trim() !== '') {
+      setSkills([...skills, { id: skills.length, name: newSkill }]);
+      setNewSkill('');
+      closeModal();
+    }
+  };
+
+  const deleteSkill = (id: number) => {
+    setSkills(skills.filter(skill => skill.id !== id));
+  };
+
+  const handleSkillChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewSkill(e.target.value);
+  };
     // Month names for the dropdown
     const months = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -48,6 +78,16 @@ const UserProfile = () => {
     const handleShowModal4 = () => {
         setShowModal4(true);
     };
+    const handleShowModal5 = () => {
+        setShowModal5(true);
+    };
+    const handleShowModal6 = () => {
+        setShowModal6(true);
+        setEditMode(!true)
+    };
+    const handleShowModal7 = () => {
+        setShowModal7(true);
+    };
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -64,9 +104,16 @@ const UserProfile = () => {
     const handleCloseModal4 = () => {
         setShowModal4(false);
     };
-    const ShowModel = () => {
-        setShow1(true)
-    }
+    const handleCloseModal5 = () => {
+        setShowModal5(false);
+    };
+    const handleCloseModal6 = () => {
+        setShowModal6(false);
+    };
+    const handleCloseModal7 = () => {
+        setShowModal7(false);
+    };
+
     return (
         <>
             <div>
@@ -156,11 +203,28 @@ const UserProfile = () => {
                     <div className='w-[90%] flex justify-evenly pt-5 m-auto'>
                         <h1 className='text-4xl font-medium'>Skills</h1>
                         <div className='flex ml-auto gap-3'>
-                        <RiAddLargeFill size={35}/>
-                        <MdOutlineEdit size={35}/>
+                        <RiAddLargeFill size={35} onClick={handleShowModal5}/>
+                        <MdOutlineEdit size={35} onClick={handleShowModal6}/>
                         </div>
                     </div>
+                    <div className='w-[90%] m-auto mt-3'>
+                    {skills.map(skill => (
+                            <p className='text-2xl border-b'>{skill.name}</p>
+                        ))}
+                    </div>
                 </div>
+                <div className='w-[95%] bg-white h-64 rounded-[10px] m-auto mt-5'>
+                    <div className='w-[90%] flex justify-evenly pt-5 m-auto'>
+                        <h1 className='text-4xl font-medium'>Experience</h1>
+                        <div className='flex ml-auto gap-3'>
+                            <MdOutlineEdit size={35} onClick={handleShowModal7}/>
+                        </div>
+                    </div>
+                    <div className='w-[90%] m-auto mt-3'>
+                    
+                    </div>
+                </div>
+
             </div>
             {showModal && (
                 <div
@@ -552,8 +616,105 @@ const UserProfile = () => {
                     </div>
                 </div>
             )}
+            {showModal5 && (
+                <div
+                    className='fixed inset-0 bg-white bg-opacity-30 z-100 backdrop-blur-sm h-full flex justify-center'
+                    onClick={handleCloseModal5}
+                >
+                    <div
+                        className='rounded-lg p-2 shadow-lg w-[55%] h-[570px] bg-white mt-10 rounded-[8px]'
+                        onClick={(e) => e.stopPropagation()} // Prevent modal closure on modal content click
+                    >
+                        <div className='w-[90%] m-auto border-b border-gray-400 pb-1 mb-5'>
+                            <h1 className='text-4xl'>Add Skllis</h1>
+                        </div>
+                        <div className='w-[90%] m-auto'>
 
+                        <input 
+                            type="text" 
+                            value={newSkill} 
+                            onChange={handleSkillChange}
+                            className="border border-black rounded-[10px] p-2 mb-4 w-full"
+                        />
+                        </div>
+                        <div className='flex gap-4 w-[90%] m-auto'>
+                            <button className='border border-black btn1 w-24 rounded h-8'><span className='text-black font-semibold' onClick={addSkill}>Save</span></button>
+                            <button className='border border-black bg-white w-24 rounded h-8'><span className='text-black font-semibold'>Cancel</span></button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {showModal6 && (
+                <div
+                    className='fixed inset-0 bg-white bg-opacity-30 z-100 backdrop-blur-sm h-full flex justify-center'
+                    onClick={handleCloseModal6}
+                >
+                    <div
+                        className='rounded-lg p-2 shadow-lg w-[55%] h-[570px] bg-white mt-10 rounded-[8px]'
+                        onClick={(e) => e.stopPropagation()} // Prevent modal closure on modal content click
+                    >
+                        <div className='w-[90%] m-auto border-b border-gray-400 pb-1 mb-5'>
+                            <h1 className='text-4xl'>Added Skllis</h1>
+                        </div>
+                        <div className='w-[90%] m-auto'>
+                        <ul className="mt-4">
+                        {skills.map(skill => (
+                            <li key={skill.id} className="flex justify-between items-center mb-2">
+                                {skill.name}
+                                <button className="bg-red-500 text-black py-1 px-2 rounded" onClick={() => deleteSkill(skill.id)}>Delete</button>
+                            </li>
+                        ))}
+                        </ul>
+                        </div>
+                        <div className='flex gap-4 w-[90%] m-auto'>
+                            <button className='border border-black btn1 w-24 rounded h-8'><span className='text-black font-semibold'>Save</span></button>
+                            <button className='border border-black bg-white w-24 rounded h-8'><span className='text-black font-semibold'>Cancel</span></button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {showModal7 && (
+                <div
+                    className='fixed inset-0 bg-white bg-opacity-30 z-100 backdrop-blur-sm h-full flex justify-center'
+                    onClick={handleCloseModal7}
+                >
+                    <div
+                        className='rounded-lg p-2 shadow-lg w-[55%] h-[570px] bg-white mt-10 rounded-[8px]'
+                        onClick={(e) => e.stopPropagation()} // Prevent modal closure on modal content click
+                    >
+                        <div className='w-[90%] m-auto border-b border-gray-400 pb-1 mb-5'>
+                            <h1 className='text-4xl'>Add experience</h1>
+                        </div>
+                        <div className='w-[90%] m-auto mb-5'>
+                            <label htmlFor="" className='mb-1 text-lg'>Title</label>
+                            <input type="text" placeholder='Ex:Retail Sales Manager' className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                        </div>
+                        <div className='w-[90%] m-auto mb-5'>
+                            <label htmlFor="" className='mb-1 text-lg'>Employment type</label>
+                            <input type="text" className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                        </div>
+                        <div className='w-[90%] m-auto mb-5'>
+                            <label htmlFor="" className='mb-1 text-lg'>Company name</label>
+                            <input type="text" placeholder='Ex:Microsoft' className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                        </div>
+                        <div className='w-[90%] m-auto mb-5'>
+                            <label htmlFor="" className='mb-1 text-lg'>Location</label>
+                            <input type="text" placeholder='Ex:London, United Kingdom' className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                        </div>
+                        <div className='w-[90%] m-auto mb-5'>
+                            <label htmlFor="" className='mb-1 text-lg'>Location</label>
+                            <input type="date"  className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                        </div>
+                        <div>
 
+                        </div>
+                        <div className='flex gap-4 w-[90%] m-auto'>
+                            <button className='border border-black btn1 w-24 rounded h-8'><span className='text-black font-semibold'>Save</span></button>
+                            <button className='border border-black bg-white w-24 rounded h-8'><span className='text-black font-semibold'>Cancel</span></button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }
