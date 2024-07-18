@@ -11,6 +11,7 @@ import Home from './components/home/Home';
 import ExamPage from './components/Exampage/ExamPage';
 import DashBoard from './components/dashboard/DashBoard';
 import UserProfile from './components/userProfile/UserProfile';
+import DashboardHome from './components/dash home/DashboardHome';
 
 function App() {
   return (
@@ -24,8 +25,14 @@ function App() {
       {/* <Route path='/signupfreelancer' element={<SignupFreelancer/>}></Route> */}
       <Route path='/loginafter' element={<AfterLogin/>}></Route>
       <Route path='/exampage' element={<ExamPage/>}></Route>
-      <Route path='/dashboard' element={<DashBoard/>}></Route>
-      <Route path='/user' element={<UserProfile/>}></Route>
+      <Route path='/dashboard' element={<DashBoard/>}>
+       
+        <Route index element={<DashboardHome />} /> {/* Default dashboard home route */}
+        <Route path='home' element={<DashboardHome />} /> {/* Explicit home route */}
+        
+        <Route path='userprofile' element={<UserProfile/>}></Route>
+      </Route>
+      <Route path='/user' element={<Home/>}></Route>
     </Routes>
     </BrowserRouter>
     </>

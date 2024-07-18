@@ -371,7 +371,7 @@ const Post = () => {
     return (
         <>
 
-            <div className='w-[600px]'>
+            <div className='w-[500px]'>
                 <div className='w-full bg-white flex justify-evenly rounded h-20 pt-5'>
                     <div className='bg_col flex max-h-6 px-3 rounded mr-auto ml-4'><RiFilter3Line className='mt-1' />Filter</div>
                     <div className='bg_col max-h-6 px-3 rounded mr-4' onClick={Show}>Create</div>
