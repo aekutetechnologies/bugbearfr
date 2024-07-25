@@ -13,6 +13,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { FaRegBell } from "react-icons/fa";
 import user_man from './images/user_man.jpeg' 
 import Post from '../Post/Post';
+import { MdWork } from "react-icons/md";
 import Navbar from '../nav/Navbar';
 import { Link, Outlet } from 'react-router-dom';
 const DashBoard = () => {
@@ -25,7 +26,8 @@ const DashBoard = () => {
                 <div className='text-2xl text-white mr-5 mt-4 flex gap-3'>
                     {/* <Link to="/login"><span>Login</span></Link>/<Link to='/signupclient'><span>Signup</span></Link> */}
                     <div><Link to='/dashboard/home'><IoHomeSharp/><p className='text-[10px]'>Home</p></Link></div>
-                    <div><FiMessageSquare/><p className='text-[10px]'>Messages</p></div>
+                    <div><Link to='/dashboard/message'><FiMessageSquare/><p className='text-[10px]'>Messages</p></Link></div>
+                    <div><Link to='/dashboard/jobs'><MdWork/><p className='text-[10px]'>Jobs</p></Link></div>
                     <div><FaRegBell/><p className='text-[10px]'>Notification</p></div>
                     <div><Link to='/dashboard/userprofile'><div className='h-10 w-10  overflow-none'><img src={user_man} alt="" className='h-full w-full rounded-full rounded-[100%]' /></div></Link></div>
                 </div>

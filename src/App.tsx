@@ -12,6 +12,8 @@ import ExamPage from './components/Exampage/ExamPage';
 import DashBoard from './components/dashboard/DashBoard';
 import UserProfile from './components/userProfile/UserProfile';
 import DashboardHome from './components/dash home/DashboardHome';
+import Message from './components/message/Message';
+import Jobs from './components/jobs/Jobs';
 
 function App() {
   return (
@@ -26,10 +28,10 @@ function App() {
       <Route path='/loginafter' element={<AfterLogin/>}></Route>
       <Route path='/exampage' element={<ExamPage/>}></Route>
       <Route path='/dashboard' element={<DashBoard/>}>
-       
         <Route index element={<DashboardHome />} /> {/* Default dashboard home route */}
         <Route path='home' element={<DashboardHome />} /> {/* Explicit home route */}
-        
+        <Route path='message' element={<Message/>}/>
+        <Route path='jobs' element={<Jobs/>}/>
         <Route path='userprofile' element={<UserProfile/>}></Route>
       </Route>
       <Route path='/user' element={<Home/>}></Route>
