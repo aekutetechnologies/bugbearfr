@@ -25,3 +25,109 @@ textarea::placeholder {
 .bg_colorr{
   background-color: rgba(5, 8, 11, 0.8);
 }
+
+
+/* card */
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.glass {
+  position: relative;
+  background: linear-gradient(#fff2, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.5s, margin 0.5s;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transform: rotate(calc(var(--r, 0) * 3deg));
+  margin: 0 -45px;
+}
+
+.card-container:hover .glass {
+  cursor: pointer;
+  transform: rotate(0deg);
+  margin: 0 30px;
+}
+
+.glass::before {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.glass p {
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .glass {
+    width: 80%;
+    margin: 0.5rem 0;
+  }
+  .card-container:hover .glass {
+    margin: 0 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .glass {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  .card-container:hover .glass {
+    margin: 0 0.5rem;
+  }
+}
+
+/* promotion */
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slidein {
+  animation: slidein 0.5s ease-out;
+}
+
+
+
+
+/* price card */
+.pricing {
+  background-image: 
+  radial-gradient(at 47% 33%, hsl(204, 55%, 40%) 0, transparent 59%), 
+  radial-gradient(at 82% 65%, hsl(219.07, 28%, 30%) 0, transparent 55%);
+}
+
+/* .pcard styles */
+.pcard {
+  background: linear-gradient(rgba(0, 0, 0, 0.133), transparent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+}
+
+
