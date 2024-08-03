@@ -1,10 +1,13 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import user from '../image/user_man.jpeg'
 import { MdOutlineEdit } from "react-icons/md";
 import { RiAddLargeFill } from "react-icons/ri";
 import comp from '../image/img-comp.jpg'
 import { HiOutlineArrowRight } from "react-icons/hi";
 import './user.css'
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { RegisterApi } from '../../api/RegisterApi';
 interface Skill {
     id: number;
     name: string;
@@ -21,15 +24,96 @@ const UserProfile = () => {
     const [showModal7, setShowModal7] = useState(false);
 
     const [skills, setSkills] = useState<Skill[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [newSkill, setNewSkill] = useState<string>('');
-  const [editMode, setEditMode] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [newSkill, setNewSkill] = useState<string>('');
+    const [editMode, setEditMode] = useState<boolean>(false);
 
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
 
+    const [datastore, setdatastore] = useState<any>([]);
+    const [SuccessMessage,setSuccessMessage]=useState<string>('');
+    const [image, setImage] = useState<string | null>(null);
+    const [image2, setImage2] = useState<string | undefined>(undefined);
+    const [profile, setProfile] = useState<string | Blob>("")
+    const [info,setInfo]=useState<object>({first_name: "", last_name: "", position: "", email: "", phone: "" })
+
     const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+    const closeModal = () => setIsModalOpen(false);
+    const token = localStorage.getItem('token');
+  const inputRef = useRef<HTMLInputElement | null>(null);
+    const handleImageClick = () => {
+        inputRef.current?.click();
+    }
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            setProfile(file)
+            console.log("from api", datastore.profile_pic)
+            console.log("from component", file)
+            setImage(URL.createObjectURL(file)); // Create a URL for the selected file
+            HandleProfileImage(file); 
+        }
+        console.log(e.target.files)
+    }
+    const HandleProfileImage = async (file: Blob) => {
+
+        const formData = new FormData();
+        formData.append("profile_pic", file);
+        try {
+            console.log("Profilee", profile)
+            const response = await axios.post(" https://bugbearback.onrender.com/api/user/upload-profile-pic/", formData,{
+                        headers: {
+                          Authorization: `Bearer ${token}`
+                        }
+                      });
+            console.log("uploaded", response);
+        } catch (error) {
+            console.log('Error register:', error);
+        }
+    }
+
+    const postEditIntroInfo = async () => {
+        
+        try {
+            const response = await RegisterApi().REGISTER("user-details/", info)
+            fetchProfile()
+            setSuccessMessage('Edited intro successfully!');
+            console.log(SuccessMessage, response);
+
+        } catch (error) {
+            console.error("Error fetching user profile:", error);
+        }
+    }
+    const handleChangeIntro=(e:ChangeEvent<HTMLInputElement>)=>{
+        const {value,name}=e.target;
+        setInfo(prevState=>({...prevState,[name]:value}))
+    }
+
+  const fetchProfile = async () => {
+    try {
+         // Replace this with how you store the token
+      const response = await axios.get(" https://bugbearback.onrender.com/api/user/user-details/", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+        setdatastore(response.data);
+        console.log("fetch success", response)
+        if (response) {
+            setImage2(response.data.profile_pic_url)
+        }
+      
+    } catch (error) {
+        console.error("Error fetching profile:", error);
+        toast.error("Error fetching profile.");
+    }
+
+}
+useEffect(()=>{
+    fetchProfile()
+},[])
 
   const addSkill = () => {
     if (newSkill.trim() !== '') {
@@ -114,28 +198,34 @@ const UserProfile = () => {
         setShowModal7(false);
     };
 
+    
     return (
         <>
             <div>
-                <div className='w-[95%] h-72 bg-white rounded-[10px] m-auto flex justify-evenly mt-5'>
+                {datastore&&<div className='w-[95%] h-72 bg-white rounded-[10px] m-auto flex justify-evenly mt-5'>
                     <div className='flex gap-1 w-[90%] mt-6'>
-                        <div className='w-52 h-52 rounded'>
+                        {/* <div className='w-52 h-52 rounded'>
                             <img src={user} alt="" className='h-full w-full rounded' />
+                        </div> */}
+                        <div className='w-52 h-52 rounded overflow-hidden group bg-red-200 m-2' onClick={handleImageClick}>
+                        {image ? <img src={image} alt="Profile Preview" className="w-full h-full hover:border border-[#f6ff00] group-hover:border-[4px]" /> : <>{datastore.profile_pic_url ? (<img src={datastore.profile_pic_url} alt="Profile Picture" className="hover:border border-[#f6ff00] group-hover:border-[4px] w-full h-full" />) : (<img src={user} alt="Userrrrrrrrr Placeholder" className="w-full h-auto hover:border border-[#f6ff00] group-hover:border-[4px]" />)}</>}
+                        <div className="relative bottom-9 w-11 h-11 ml-auto mr-2 bg-[#f6ff00] rounded-full h-6 w-6 flex item-center justify-center invisible group-hover:visible"><MdOutlineEdit className="mt-1" /></div>
+                        <input type="file" onChange={handleChange} ref={inputRef} className="hidden text-white file:w-[60%] file:h-9 mt-3 mb-4" />
                         </div>
                         <div>
-                            <h1 className='text-5xl'>Mahab Boz</h1>
-                            <p className='text-xl mt-1'>UI/UX Designer</p>
-                            <p className='text-gray-400 text-base mt-1'>New York,United States</p>
+                            <h1 className='text-5xl'>{datastore.first_name} {datastore.last_name}</h1>
+                            <p className='text-xl mt-1'>{datastore.position}</p>
+                            <p className='text-gray-400 text-base mt-1'>{datastore.country},{datastore.address}</p>
                             <p className='font-medium mt-1'>10 connectinos</p>
                             <p className='mt-1'>152 followers</p>
                         </div>
                         <div className='ml-auto'>
                             <MdOutlineEdit size={35} color="black" className='cursor-pointer ml-auto' onClick={handleShowModal} />
-                            <p className='text-gray-400 mt-1'>mahab147@gmail.com</p>
-                            <p className='mt-1'>+1 4537652129</p>
+                            <p className='text-gray-400 mt-1'>{datastore.email}</p>
+                            <p className='mt-1'>{datastore.phone}</p>
                         </div>
                     </div>
-                </div>
+                </div>}
                 <div className='w-[95%] m-auto h-72 rounded-[10px] bg-white mt-5'>
                     <div className='w-[90%] m-auto flex justify-evenly pt-10'>
                         <h1 className='text-4xl font-medium'>About</h1>
@@ -241,27 +331,27 @@ const UserProfile = () => {
                         <div className='flex justify-evenly w-[90%] m-auto mb-5'>
                             <div className='w-[47%]'>
                                 <label htmlFor="" className='text-lg mb-1'>First name</label>
-                                <input type="text" name="" id="" className='w-full border border-black rounded-[6px] h-10 outline-none' />
+                                <input type="text" name="first_name" id="" className='w-full border border-black rounded-[6px] h-10 outline-none' onChange={handleChangeIntro}/>
                             </div>
                             <div className='w-[47%] ml-auto'>
                                 <label htmlFor="" className='text-lg mb-1'>Last name</label>
-                                <input type="text" name="" placeholder='last name' id="" className='w-full border border-black rounded-[6px] h-10 outline-none' />
+                                <input type="text" name="last_name" placeholder='last name' id="" className='w-full border border-black rounded-[6px] h-10 outline-none' onChange={handleChangeIntro}/>
                             </div>
                         </div>
                         <div className='w-[90%] m-auto mb-5'>
                             <label htmlFor="" className='mb-1 text-lg'>Designation</label>
-                            <input type="text" className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                            <input type="text" name='position' className='w-full h-10 outline-none border border-black rounded-[6px]' onChange={handleChangeIntro}/>
                         </div>
                         <div className='w-[90%] m-auto mb-5'>
                             <label htmlFor="" className='mb-1 text-lg'>Email</label>
-                            <input type="text" className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                            <input type="text" name='email' className='w-full h-10 outline-none border border-black rounded-[6px]' onChange={handleChangeIntro}/>
                         </div>
                         <div className='w-[90%] m-auto mb-5'>
                             <label htmlFor="" className='mb-1 text-lg'>Mobile</label>
-                            <input type="text" className='w-full h-10 outline-none border border-black rounded-[6px]' />
+                            <input type="text" name='phone' className='w-full h-10 outline-none border border-black rounded-[6px]' onChange={handleChangeIntro}/>
                         </div>
                         <div className='flex gap-4 w-[90%] m-auto'>
-                            <button className='border border-black btn1 w-24 rounded h-8'><span className='text-black font-semibold'>Save</span></button>
+                            <button className='border border-black btn1 w-24 rounded h-8' onClick={postEditIntroInfo}><span className='text-black font-semibold'>Save</span></button>
                             <button className='border border-black bg-white w-24 rounded h-8'><span className='text-black font-semibold'>Cancel</span></button>
                         </div>
                     </div>

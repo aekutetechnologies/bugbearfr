@@ -3,12 +3,16 @@ import axios from 'axios';
 
 
 const RegisterApi = () => {
-    let apiUrl="http://127.0.0.1:8000/api/user"
-    
+    let apiUrl=" https://bugbearback.onrender.com/api/user"
+    const token = localStorage.getItem('token');
     const REGISTER = async (endpoint: string, data:object) => {
       console.log("ala",data)
         try {
-          const response = await axios.post(`${apiUrl}/${endpoint}`, data);
+          const response = await axios.post(`${apiUrl}/${endpoint}`, data,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
             console.log("Done!",response.data)
           return response.data;
         } catch (error) {

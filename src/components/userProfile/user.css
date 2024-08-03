@@ -11,3 +11,10 @@ textarea::placeholder {
 .user_in::placeholder {
   color: black;
 }
+.edit-icon{
+  display: none;
+}
+
+.profile:hover .edit-icon{
+  display: block;
+}

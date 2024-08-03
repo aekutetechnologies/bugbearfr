@@ -34,7 +34,7 @@ const AfterLogin = () => {
         console.log(e.target.files)
     }
     const handleChangeInfo = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const { name, value } = e.target;   
         setInfo(prevState => ({ ...prevState, [name]: value }));
         // setCreadential(prevState => ({...prevState,   [name]: value }));    
     }
@@ -58,7 +58,7 @@ const AfterLogin = () => {
 
     const fetchProfile = async () => {
         try {
-            const response = await axios.get("http://127.0.0.1:8000/api/user/user-details/");
+            const response = await axios.get(" https://bugbearback.onrender.com/api/user/user-details/");
             setdatastore(response.data);
             console.log("fetch success", response)
             if (response) {
@@ -77,7 +77,7 @@ const AfterLogin = () => {
         formData.append("profile_pic", profile);
         try {
             console.log("Profilee", profile)
-            const response = await axios.post("http://127.0.0.1:8000/api/user/upload-profile-pic/", formData);
+            const response = await axios.post(" https://bugbearback.onrender.com/api/user/upload-profile-pic/", formData);
             console.log("uploaded", response);
         } catch (error) {
             console.log('Error register:', error);
@@ -95,7 +95,7 @@ const AfterLogin = () => {
             console.error("Error fetching user profile:", error);
         }
     }
-    useEffect(() => {
+    useEffect(() => { 
         fetchProfile()
     }, [])
 
