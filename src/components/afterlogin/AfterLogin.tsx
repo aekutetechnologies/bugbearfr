@@ -20,6 +20,7 @@ const AfterLogin = () => {
     const [ErrorMessage, setErrorMessage] = useState<string>("")
 
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const token = localStorage.getItem('token');
     const handleImageClick = () => {
         inputRef.current?.click();
     }
@@ -46,7 +47,7 @@ const AfterLogin = () => {
         setIsHovered(false);
     };
     useEffect(() => {
-        let token = localStorage.getItem('token');
+        
 
         if (token) {
 
@@ -58,7 +59,11 @@ const AfterLogin = () => {
 
     const fetchProfile = async () => {
         try {
-            const response = await axios.get(" https://bugbearback.onrender.com/api/user/user-details/");
+            const response = await axios.get(" https://bugbearback.onrender.com/api/user/user-details/",{
+                        headers: {
+                          Authorization: `Bearer ${token}`
+                        }
+                      });
             setdatastore(response.data);
             console.log("fetch success", response)
             if (response) {
@@ -90,7 +95,6 @@ const AfterLogin = () => {
             const response = await RegisterApi().REGISTER("user-details/", info)
             setSuccessMessage('Registered successfully!');
             console.log(SuccessMessage, response);
-
         } catch (error) {
             console.error("Error fetching user profile:", error);
         }

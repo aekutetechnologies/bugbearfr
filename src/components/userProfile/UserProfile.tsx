@@ -63,11 +63,13 @@ const UserProfile = () => {
         formData.append("profile_pic", file);
         try {
             console.log("Profilee", profile)
-            const response = await axios.post(" https://bugbearback.onrender.com/api/user/upload-profile-pic/", formData,{
+            const response = await axios.post(" https://bugbearback.onrender.com/api/user/upload-profile-pic/", formData,
+            {
                         headers: {
                           Authorization: `Bearer ${token}`
                         }
-                      });
+                      }
+                );
             console.log("uploaded", response);
         } catch (error) {
             console.log('Error register:', error);

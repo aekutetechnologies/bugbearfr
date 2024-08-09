@@ -8,11 +8,8 @@ const RegisterApi = () => {
     const REGISTER = async (endpoint: string, data:object) => {
       console.log("ala",data)
         try {
-          const response = await axios.post(`${apiUrl}/${endpoint}`, data,{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+          const response = await axios.post(`${apiUrl}/${endpoint}`, data
+        );
             console.log("Done!",response.data)
           return response.data;
         } catch (error) {
