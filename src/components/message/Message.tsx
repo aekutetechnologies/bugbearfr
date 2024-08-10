@@ -74,7 +74,7 @@ const data: MessageData[] = [
         image: user
     }
 ]
-// massege
+// massege dd
 const Message = () => {
     const [msgBox, setMsgBox] = useState(false);
     const [itemNo, setItemNo] = useState<number | null>(null)
