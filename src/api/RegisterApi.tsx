@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 
-
 const RegisterApi = () => {
     let apiUrl=" https://bugbearback.onrender.com/api/user"
     const token = localStorage.getItem('token');
@@ -14,7 +13,7 @@ const RegisterApi = () => {
           return response.data;
         } catch (error) {
           console.log('Error register:', error);
-          throw error;
+          throw error;       
         }
       };
   return {REGISTER}

@@ -110,7 +110,7 @@ const Post = () => {
 
     const fetchComments = async (postId: number) => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/posts/comments/${postId}/`);
+            const response = await axios.get(`https://bugbearback.onrender.com/api/posts/comments/${postId}/`);
             setCommentData(response.data);
             setactiveCommentIndex(postId);
             setCommentSection(true);
@@ -122,9 +122,9 @@ const Post = () => {
     const fetchProfile = async () => {
         try {
 
-            const response = await axios.get("http://127.0.0.1:8000/api/posts/");
+            const response = await axios.get("https://bugbearback.onrender.com/api/posts/");
             setdatastore(response.data);
-            console.log("fetch success", datastore.title);
+            console.log("fetch success", datastore);
             // if (response) {
             //     setData(response.data.profile_pic_url)
             // }
@@ -144,13 +144,13 @@ const Post = () => {
         const postId = index + 1;
         console.log("post:", postId);
         let token = localStorage.getItem('token');
-        const url = `http://127.0.0.1:8000/api/posts/${postId}/like/`;
+        const url = `https://bugbearback.onrender.com/api/posts/${postId}/like/`;
 
         try {
             const response = await axios.post(url, {}, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Replace with your actual access token if needed
+                    'Authorization': `Bearer ${token}`, 
                 }
             });
 
@@ -177,7 +177,7 @@ const Post = () => {
             formData.append("title", title1);
             formData.append("content", content1);
             formData.append("image", image1);
-            const response = await axios.post("http://127.0.0.1:8000/api/posts/create-post/", formData);;
+            const response = await axios.post("https://bugbearback.onrender.com/api/posts/create-post/", formData);;
             // setSuccessMessage('Registered successfully!');
             console.log("Registered successfully!", response);
             console.log("info:", info);
@@ -202,7 +202,7 @@ const Post = () => {
       
 
         
-        const url = `http://127.0.0.1:8000/api/posts/comments/${index}/`;
+        const url = `https://bugbearback.onrender.com/api/posts/comments/${index}/`;
         let token = localStorage.getItem('token');
 
         try {
@@ -331,7 +331,7 @@ const Post = () => {
                     <p className='fond-bold text-xl mt-4 px-5'>{title}</p>
                     <p className='mt-5 px-5'>{content}</p>
                     <div className='w-full'>
-                        {image && <img src={`http://127.0.0.1:8000${image}`} className="h-[200px] w-full"></img>}
+                        {image && <img src={`https://bugbearback.onrender.com${image}`} className="h-[200px] w-full"></img>}
                     </div>
                     <div className='flex justify-evenly mt-5 px-5'>
                         <div className='flex'><img src={imgs} alt="" className='h-5 w-5 rounded-full' /><span className='text-gray-300'>144</span></div>
